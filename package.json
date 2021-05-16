@@ -1,9 +1,9 @@
 {
   "name": "vue-highway",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "make coding vue like driving on the highway",
-  "main": "dist/vf.js",
-  "typings": "dist/vf.d.ts",
+  "main": "dist/vueHighway.js",
+  "typings": "dist/vueHighway.d.ts",
   "scripts": {
     "test": "jest"
   },
@@ -13,11 +13,11 @@
   "author": "avenger9527",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/avenger9527/vueflow/issues"
+    "url": "https://github.com/avenger9527/vue-highway/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/avenger9527/vueflow.git"
+    "url": "https://github.com/avenger9527/vue-highway.git"
   },
   "peerDependencies": {
     "webpack": "^3.0.0 || ^4.1.0 || ^5.0.0-0"
