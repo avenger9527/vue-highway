@@ -1,21 +1,8 @@
 const { compileTemplate } = require("@vue/component-compiler-utils");
 
-// Loader that compiles raw template into JavaScript functions.
-// This is injected by the global pitcher (../pitch) for template
-// selection requests initiated from vue files.
-// isScoped 跟style <scoped> 关联的
 module.exports = function(source, hashId, isScoped, functional) {
-  // '\n<div id="app">\n  app\n  <Header />\n</div>\n'
   const loaderContext = this;
 
-  // id:'7ba5bd90'// hash
-  // type:'template'
-  // vue:''
-
-  // although this is not the main vue-loader, we can get access to the same
-  // vue-loader options because we've set an ident in the plugin and used that
-  // ident to create the request for this loader in the pitcher.
-  // {}
   const options = {};
   const id = hashId;
   const isServer = loaderContext.target === "node";

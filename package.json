@@ -1,14 +1,33 @@
 {
-  "name": "vueflow",
-  "version": "0.0.1",
-  "description": "write vue like flow",
+  "name": "vue-highway",
+  "version": "0.1.0",
+  "description": "make coding vue like driving on the highway",
   "main": "dist/vf.js",
+  "typings": "dist/vf.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "keywords": [
     "vue"
   ],
   "author": "avenger9527",
-  "license": "MIT"
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/avenger9527/vueflow/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/avenger9527/vueflow.git"
+  },
+  "peerDependencies": {
+    "webpack": "^3.0.0 || ^4.1.0 || ^5.0.0-0"
+  },
+  "dependencies": {
+    "@vue/component-compiler-utils": "^3.1.0",
+    "hash-sum": "^1.0.2",
+    "loader-utils": "^1.1.0",
+    "vue-hot-reload-api": "^2.3.0",
+    "vue-style-loader": "^4.1.0",
+    "vue-template-compiler": "^2.5.16"
+  }
 }

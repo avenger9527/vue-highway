@@ -7,18 +7,17 @@ type VueInstance = {
   readonly $refs: any;
   readonly $vnode: any;
   $nextTick(): Promise<void>;
-  _vfContext: VFContext; 
-  vflow: VueFlow;
+  _vhContext: VHContext; 
 };
 // ((createElement: CreateElement) => VNode)[];
-export interface VFContext {
-  context_id: "flow_ctx";
+export interface VHContext {
+  context_id: "highway_ctx";// for Vue.extend
   name: string;
   vue: null | VueInstance;
   data: NormalObj;
   props: NormalObj;
-  computed: ((ctx: VFContext) => NormalObj)[];
-  methods: ((ctx: VFContext) => NormalObj)[]; //
+  computed: ((ctx: VHContext) => NormalObj)[];
+  methods: ((ctx: VHContext) => NormalObj)[]; //
   components: NormalObj;
 
   render: any;
@@ -34,7 +33,7 @@ export interface VFContext {
   _scopeId?: string;
   [key: string]: any;
 }
-type doCtx = (ctx: VFContext) => void;
+type doCtx = (ctx: VHContext) => void;
 type lifeHook = doCtx[];
 const lifeHooks = [
   "beforeCreate",
@@ -46,15 +45,14 @@ const lifeHooks = [
 ];
 declare namespace JSX {
   interface IntrinsicElements {
-    foo: { bar?: boolean };
     [elemName: string]: any;
   }
 }
-const CONTEXT_ID = "flow_ctx";
+const CONTEXT_ID = "highway_ctx";
 // for loader
 const NEVER_LOADER_MYSELF = true;
-class VueFlow {
-  context: VFContext;
+class VueHighway {
+  context: VHContext;
   // vue: null | VueInstance;
   componentName?: string;
   constructor(componentName?: string) {
@@ -84,7 +82,7 @@ class VueFlow {
   final() {
     // every Vue.extend copy context
     const _context = clone(this.context);
-    const arrToObj = (pArr: ((ctx: VFContext) => NormalObj)[]) =>
+    const arrToObj = (pArr: ((ctx: VHContext) => NormalObj)[]) =>
       pArr.reduce((acc, cur) => {
         acc = {
           ...acc,
@@ -97,10 +95,6 @@ class VueFlow {
     _context.methods = objMethods;
     _context.computed = objComputed;
     // TODO bindVue for hotReload
-    // const bindVue = (vueInstance: VueInstance) => {
-    //   this.vue = vueInstance;
-    //   vueInstance.vflow = this;
-    // };
     return {
       context_id: _context.context_id,
       props: _context.props,
@@ -124,7 +118,7 @@ class VueFlow {
             acc[cur] = function(this: VueInstance) {
               // bindVue(this);
               _context.vue = this;
-              this._vfContext = _context;
+              this._vhContext = _context;
               _context[cur].forEach((i: doCtx) => i(_context));
             };
           } else if (_context[cur].length) {
@@ -155,7 +149,7 @@ class VueFlow {
   //   return this;
   // }
   // link any style work
-  flow<P = (NormalObj | doCtx)[]>(keyList: string, arr: P) {
+  race<P = (NormalObj | doCtx)[]>(keyList: string, arr: P) {
     keyList.split("-").forEach((item, index) => {
       (this as any)[item](arr[index]);
     });
@@ -169,11 +163,11 @@ class VueFlow {
     Object.assign(this.context.props, { ...obj });
     return this;
   }
-  computed(fn: (ctx: VFContext) => NormalObj) {
+  computed(fn: (ctx: VHContext) => NormalObj) {
     this.context.computed.push(fn);
     return this;
   }
-  methods(fn: (ctx: VFContext) => NormalObj) {
+  methods(fn: (ctx: VHContext) => NormalObj) {
     this.context.methods.push(fn);
     return this;
   }
@@ -215,7 +209,7 @@ function clone(obj: any) {
   return res;
 }
 
-export const ExtendFlow = (Vue: any) => {
+export const loadVueHighway = (Vue: any) => {
   let backUp = Vue.extend;
   Vue.extend = function(options: any) {
     if (options.context && options.context.context_id === CONTEXT_ID) {
@@ -226,4 +220,4 @@ export const ExtendFlow = (Vue: any) => {
   };
 };
 
-export default VueFlow;
+export default VueHighway;

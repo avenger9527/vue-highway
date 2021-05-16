@@ -4,12 +4,12 @@ const templateLoader = require("./templateLoader");
 // 1.only one JOB :
 // replace the template code to iife which return{render,staticRenderfns}
 module.exports = function(source) {
-  // check if this file is vueFlow jsfile
+  // check if this file is vue-highway jsfile
   // if not return sourced
   // TODO better condition?
   if (
-    !/VueFlow/gi.test(source) || // j/ts which import vueflow
-    /ExtendFlow/gi.test(source) // main.js vueflow.js
+    !/vue-highway/gi.test(source) || // j/ts which import vue-highway
+    /loadVueHighway/gi.test(source) // [entry].js which import loadVueHighway
   )
     return source;
 
