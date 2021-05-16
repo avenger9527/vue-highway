@@ -1,0 +1,14 @@
+{
+  "name": "vueflow",
+  "version": "0.0.1",
+  "description": "write vue like flow",
+  "main": "dist/vf.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "vue"
+  ],
+  "author": "avenger9527",
+  "license": "MIT"
+}
