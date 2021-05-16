@@ -1,6 +1,6 @@
 {
   "name": "vue-highway",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "make coding vue like driving on the highway",
   "main": "vueHighway.js",
   "typings": "vueHighway.d.ts",
