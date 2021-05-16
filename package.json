@@ -1,9 +1,9 @@
 {
   "name": "vue-highway",
-  "version": "0.2.0",
+  "version": "0.2.2",
   "description": "make coding vue like driving on the highway",
-  "main": "dist/vueHighway.js",
-  "typings": "dist/vueHighway.d.ts",
+  "main": "vueHighway.js",
+  "typings": "vueHighway.d.ts",
   "scripts": {
     "test": "jest"
   },

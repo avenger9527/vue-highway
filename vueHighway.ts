@@ -1,4 +1,5 @@
 // !important transform to js target should be ES5 ! or can't run.
+// tsc .\vueHighway.ts --target ES5 -d
 type NormalObj = {
   [key: string]: any;
 };
