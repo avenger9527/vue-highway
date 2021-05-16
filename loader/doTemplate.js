@@ -28,6 +28,8 @@ module.exports = function(source) {
 
   function doTemplate(sourceCode) {
     return sourceCode.replace(/\.template(.|\r?\n)*?\.done/g, (templateStr) => {
+      // for god's sake that line could be comment !
+      if(/\/\//g.test(templateStr)) return templateStr
       let compileTemplateRes = "";
       templateStr.replace(/<(.|\r?\n)*\>/g, (htmlStr) => {
         compileTemplateRes = templateLoader(
